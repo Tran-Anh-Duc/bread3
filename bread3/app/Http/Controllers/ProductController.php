@@ -2,84 +2,63 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+
+use App\Repositories\CategoryRepository;
+use App\Repositories\StoreRepository;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
+
+
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    protected $productRepository;
+    protected $categoryRepository;
+    protected $storeRepository;
+
+    public function __construct(ProductRepository $productRepository,CategoryRepository $categoryRepository , StoreRepository $storeRepository)
+    {
+        $this->storeRepository = $storeRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->productRepository = $productRepository;
+    }
+
     public function index()
     {
-        //
+        $products = $this->productRepository->getAll();
+        return response()->json(['message'=>'index success','data'=>$products],200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $product = $this->productRepository->create($request);
+        $category = $this->categoryRepository->getAll();
+        $store = $this->storeRepository->getAll();
+        return response()->json(['message'=>'create success','data'=>$product,$category,$store],200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
+
+    public function show($id)
     {
-        //
+       $product = $this->productRepository->getById($id);
+       return response()->json(['message'=>' show product success','data'=>$product],200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
+
+    public function update(Request $request,$id)
     {
-        //
+        $product = $this->productRepository->edit($request,$id);
+        $category = $this->categoryRepository->getAll();
+        $store = $this->storeRepository->getAll();
+        return response()->json(['message'=>'update success','data'=>$product],200);
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Product $product)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
-    {
-        //
+        $this->productRepository->delete($id);
+        return response()->json(['message'=>'delete success',],200);
     }
 }
