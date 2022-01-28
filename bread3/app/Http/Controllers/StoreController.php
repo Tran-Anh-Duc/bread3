@@ -2,84 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Store;
+
+use App\Repositories\StoreRepository;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    protected $storeRepository;
+
+    public function __construct(StoreRepository $storeRepository)
+    {
+        $this->storeRepository = $storeRepository;
+    }
+
     public function index()
     {
-        //
+        $stores = $this->storeRepository->getAll();
+        return response()->json($stores);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $store = $this->storeRepository->create($request);
+        return response()->json(['message'=>'create success', 'data'=>$store],200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Store  $store
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Store $store)
+
+    public function update(Request $request, $id)
     {
-        //
+        $store = $this->storeRepository->edit($request,$id);
+        return response()->json(['message'=>'update success','data'=>$store],200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Store  $store
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Store $store)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Store  $store
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Store $store)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Store  $store
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Store $store)
-    {
-        //
+        $this->storeRepository->delete($id);
+        return response()->json(['message'=>'delete success'],200);
     }
 }
