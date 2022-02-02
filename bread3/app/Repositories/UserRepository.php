@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserRepository extends BaseRepository
@@ -20,5 +22,7 @@ class UserRepository extends BaseRepository
         User::query()->findOrFail($id);
         return User::query()->where("id","=",$id)->update($data);
     }
+
+
 
 }

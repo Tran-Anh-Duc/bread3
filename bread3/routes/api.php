@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StoreController;
@@ -62,5 +63,15 @@ Route::prefix('products')->group(function (){
     Route::put('/{id}',[ProductController::class,'update']);
     Route::delete('/{id}',[ProductController::class,'destroy']);
 });
+
+Route::prefix('/orders')->group(function (){
+    Route::get('/cart',[OrderController::class,'cart']);
+    Route::get('/create/{id}',[OrderController::class,'addOrder']);
+    Route::patch('/update-cart',[OrderController::class,'updateOrder']);
+    Route::delete('/remove-cart',[OrderController::class,'removeOrder']);
+});
+
+Route::get('/search/{name}',[ProductController::class,'searchProduct']);
+Route::get('/filter',[ProductController::class,'searchFilter']);
 
 

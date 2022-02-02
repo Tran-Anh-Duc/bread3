@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Repositories\AuthRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
@@ -24,8 +25,6 @@ class AuthController extends Controller
     }
 
 
-
-
     public function registerUser(Request $request)
     {
         $this->authRepository->register($request);
@@ -38,4 +37,20 @@ class AuthController extends Controller
         Auth::logout();
         return response()->json(['message' => "logout success"]);
     }
+
+    public function changePassword(Request $request)
+    {
+        $user = \auth()->user();
+        if (Hash::check($request->old_password,$user->password)){
+            $user->update([
+               'password'=>bcrypt($request->new_password)
+            ]);
+            return  response()->json(['message'=>'success']);
+        }else{
+            return response()->json(['message'=>'error']);
+        }
+
+    }
+
+
 }

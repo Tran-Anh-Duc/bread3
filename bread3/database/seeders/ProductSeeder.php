@@ -27,7 +27,7 @@ class ProductSeeder extends Seeder
         $product->name = 'Bánh mỳ sốt vang';
         $product->description = 'một dòng bánh mỳ mà khách hàng dưới mười tám tuổi rất là ưa chuộng';
         $product->image = '2';
-        $product->price = '50000';
+        $product->price = '60000';
         $product->category_id = 2;
         $product->store_id = 2;
         $product->save();
@@ -36,7 +36,7 @@ class ProductSeeder extends Seeder
         $product->name = 'Bánh mỳ nướng mật ong';
         $product->description = 'một dòng bánh mỳ mà khách hàng dưới mười tám tuổi rất là ưa chuộng';
         $product->image = '3';
-        $product->price = '50000';
+        $product->price = '70000';
         $product->category_id = 3;
         $product->store_id = 3;
         $product->save();
