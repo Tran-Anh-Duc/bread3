@@ -8,38 +8,61 @@ use Illuminate\Http\Request;
 
 class ProductRepository extends BaseRepository
 {
+    private $productModel;
 
     public function __construct(Product $product)
     {
-        parent::__construct($product);
+        $this->productModel = $product;
     }
+
 
     public function create(Request $request)
     {
-        $data = $request->all();
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $link = time() . '.' . $image->getClientOriginalExtension();
-            $path = public_path('image');
-            $image->move($path, $link);
-        }
-        return Product::query()->create($data);
+        $data = [
+            Product::NAME => $request->name,
+            Product::DESCRIPTION => $request->description,
+            Product::IMAGE => $request->image,
+            Product::PRICE => $request->price,
+            Product::CATEGORY_ID => $request->category_id,
+            Product::STORE_ID => $request->store_id,
+            Product::STATUS => Product::ACTIVE,
+        ];
+        $result = $this->productModel->create($data);
+        return $result;
     }
 
     public function edit(Request $request, $id)
     {
-        $data = $request->all();
-        Product::query()->find($id);
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $data['image'] = time() . '.' . $image->getClientOriginalExtension();
-            $path = public_path('image');
-            $image->move($path, $data['image']);
-        }
-        return Product::query()->where('id', '=', $id)->update($data);
+        $data = [
+            Product::NAME => $request->name,
+            Product::DESCRIPTION => $request->description,
+            Product::IMAGE => $request->image,
+            Product::PRICE => $request->price,
+            Product::CATEGORY_ID => $request->category_id,
+            Product::STORE_ID => $request->store_id,
+            Product::STATUS => Product::ACTIVE,
+        ];
+        $result = $this->productModel->find($id)->update($data);
+        return $result;
     }
 
+    public function index()
+    {
+        $result = $this->productModel->all();
+        return $result;
+    }
 
+    public function delete($id)
+    {
+        $result = $this->productModel->find($id)->delete();
+        return $result;
+    }
+
+    public function show($id)
+    {
+        $result =$this->productModel->find($id);
+        return $result;
+    }
 
 
 }

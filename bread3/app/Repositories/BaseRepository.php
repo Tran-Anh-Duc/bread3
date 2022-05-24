@@ -18,12 +18,12 @@ class BaseRepository
 
     public function getById($id)
     {
-        return $this->model->query()->findOrFail($id);
+        return $this->model->query()->find($id);
     }
 
     public function delete($id)
     {
-        $model = $this->model->query()->findOrFail($id);
-        $model->delete();
+        $result = $this->model->find($id);
+        return $result->delete();
     }
 }

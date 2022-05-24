@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -36,5 +37,19 @@ class UserController extends Controller
     {
         $this->userRepository->delete($id);
         return response()->json(['message' => 'delete success']);
+    }
+
+    public function changePassword(Request $request)
+    {
+        $user = $request->user();
+        if (Hash::check($request->old_password,$user->password)){
+            $user->update([
+                'password'=>Hash::make($request->password)
+            ]);
+            return  response()->json(['message'=>'success']);
+        }else{
+            return response()->json(['message'=>'error']);
+        }
+
     }
 }

@@ -19,7 +19,9 @@ class ProductController extends Controller
     protected $storeRepository;
 
 
-    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository, StoreRepository $storeRepository)
+    public function __construct(ProductRepository $productRepository,
+                                CategoryRepository $categoryRepository,
+                                StoreRepository $storeRepository)
 
     {
         $this->storeRepository = $storeRepository;
@@ -32,8 +34,12 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = $this->productRepository->getAll();
-        return response()->json(['message' => 'index success', 'data' => $products], 200);
+        $products = $this->productRepository->index();
+        return response()->json([
+            'message' => 'index success',
+            'status'=> 200,
+            'data' => $products
+        ]);
     }
 
 
@@ -52,8 +58,12 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = $this->productRepository->getById($id);
-        return response()->json(['message' => ' show product success', 'data' => $product], 200);
+        $product = $this->productRepository->show($id);
+        return response()->json([
+            'message' => ' show product success',
+            'status'=> 200,
+            'data' => $product
+        ]);
     }
 
 

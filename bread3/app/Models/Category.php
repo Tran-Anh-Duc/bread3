@@ -15,10 +15,25 @@ class Category extends Model
 {
     use HasFactory;
 
+    const NAME = 'name';
+    const IMAGE = 'image';
+    const DESCRIPTION = "description";
+    const STATUS = "status";
+    const CREATED_AT = "created_at";
+    const CREATED_BY = "created_by";
+    const UPDATED_AT  = "updated_at";
+    const UPDATED_BY  = "updated_by";
+
+    const ACTIVE = 'active';
+    const BLOCK = 'block';
+
     protected $fillable = [
         'name',
         'image',
         'description',
+        'status',
+        'created_at',
+        'created_by',
     ];
 
     public function product()

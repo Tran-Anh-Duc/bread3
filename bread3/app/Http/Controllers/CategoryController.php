@@ -16,8 +16,12 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = $this->categoryRepository->getAll();
-        return response()->json(['message' => 'index success', $categories], 200);
+        $categories = $this->categoryRepository->index();
+        return response()->json([
+            'message' => 'index success',
+            'status' => '200',
+            'data' => $categories
+        ]);
     }
 
     public function store(Request $request)
@@ -29,12 +33,25 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $category = $this->categoryRepository->edit($request, $id);
-        return response()->json(['message' => 'update success', 'data' =>$category], 200);
+        return response()->json([
+            'message'=>'update success',
+            'status' => '200',
+            'data'=>$category
+        ]);
     }
 
     public function destroy($id)
     {
         $this->categoryRepository->delete($id);
-        return response()->json(['message' => 'delete success'], 200);
+        return response()->json([
+            'message' => 'update success',
+            'status' => '200',
+        ]);
+    }
+
+    public function show($id)
+    {
+        $result = $this->categoryRepository->show($id);
+        return $result;
     }
 }

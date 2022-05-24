@@ -23,6 +23,17 @@ class Product extends Model
         'store_id',
     ];
 
+    const NAME ='name';
+    const DESCRIPTION ='description';
+    const IMAGE = 'image';
+    const PRICE = 'price';
+    const STATUS = 'status';
+    const CATEGORY_ID = 'category_id';
+    const STORE_ID = 'store_id';
+
+    const ACTIVE = 'active';
+    const BLOCK = 'block';
+
     public function categories()
     {
         return $this->hasMany(Category::class);

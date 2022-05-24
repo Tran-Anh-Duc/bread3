@@ -38,19 +38,7 @@ class AuthController extends Controller
         return response()->json(['message' => "logout success"]);
     }
 
-    public function changePassword(Request $request)
-    {
-        $user = \auth()->user();
-        if (Hash::check($request->old_password,$user->password)){
-            $user->update([
-               'password'=>bcrypt($request->new_password)
-            ]);
-            return  response()->json(['message'=>'success']);
-        }else{
-            return response()->json(['message'=>'error']);
-        }
 
-    }
 
 
 }

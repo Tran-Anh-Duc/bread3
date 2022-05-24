@@ -28,6 +28,8 @@ Route::prefix("users")->group(function (){
     Route::get("/",[UserController::class,'index']);
     Route::put("/{id}",[UserController::class,'edit']);
     Route::delete("/{id}",[UserController::class,'delete']);
+    Route::post('/change',[UserController::class,'changePassword']);
+
 });
 
 Route::prefix("auth")->group(function (){
@@ -43,10 +45,11 @@ Route::prefix('roles')->group(function (){
 });
 
 Route::prefix('categories')->group(function (){
-    Route::get('/',[CategoryController::class,'index']);
-    Route::put('/{id}',[CategoryController::class,'update']);
+    Route::post('/index',[CategoryController::class,'index']);
+    Route::post('update/{id}',[CategoryController::class,'update']);
     Route::post('/create',[CategoryController::class,'store']);
-    Route::delete('/{id}',[CategoryController::class,'destroy']);
+    Route::post('/delete/{id}',[CategoryController::class,'destroy']);
+    Route::post('/show/{id}',[CategoryController::class,'show']);
 });
 
 Route::prefix('stores')->group(function (){
@@ -57,11 +60,11 @@ Route::prefix('stores')->group(function (){
 });
 
 Route::prefix('products')->group(function (){
-    Route::get('/',[ProductController::class,'index']);
+    Route::post('/index',[ProductController::class,'index']);
     Route::post('/create',[ProductController::class,'store']);
-    Route::get('/{id}',[ProductController::class,'show']);
-    Route::put('/{id}',[ProductController::class,'update']);
-    Route::delete('/{id}',[ProductController::class,'destroy']);
+    Route::post('/show/{id}',[ProductController::class,'show']);
+    Route::post('/update/{id}',[ProductController::class,'update']);
+    Route::post('/delete/{id}',[ProductController::class,'destroy']);
 });
 
 Route::prefix('/orders')->group(function (){
