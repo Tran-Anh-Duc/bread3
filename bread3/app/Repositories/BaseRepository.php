@@ -26,4 +26,6 @@ class BaseRepository
         $result = $this->model->find($id);
         return $result->delete();
     }
+
+
 }

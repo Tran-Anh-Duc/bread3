@@ -65,6 +65,7 @@ Route::prefix('products')->group(function (){
     Route::post('/show/{id}',[ProductController::class,'show']);
     Route::post('/update/{id}',[ProductController::class,'update']);
     Route::post('/delete/{id}',[ProductController::class,'destroy']);
+    Route::post('/get_five_product',[ProductController::class,'get_five_products_new']);
 });
 
 Route::prefix('/orders')->group(function (){
@@ -75,6 +76,6 @@ Route::prefix('/orders')->group(function (){
 });
 
 Route::get('/search/{name}',[ProductController::class,'searchProduct']);
-Route::get('/filter',[ProductController::class,'searchFilter']);
+Route::post('/filter',[ProductController::class,'searchFilter']);
 
 

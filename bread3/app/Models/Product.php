@@ -21,15 +21,20 @@ class Product extends Model
         'price',
         'category_id',
         'store_id',
+        'number',
+        'view',
+        'product_code',
     ];
 
     const NAME ='name';
     const DESCRIPTION ='description';
     const IMAGE = 'image';
     const PRICE = 'price';
+    const VIEW = 'view';
     const STATUS = 'status';
     const CATEGORY_ID = 'category_id';
     const STORE_ID = 'store_id';
+    const PRODUCT_CODE = 'product_code';
 
     const ACTIVE = 'active';
     const BLOCK = 'block';

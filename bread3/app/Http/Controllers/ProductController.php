@@ -34,22 +34,30 @@ class ProductController extends Controller
 
     public function index()
     {
+        $count = 0;
+        $a = [];
         $products = $this->productRepository->index();
+        if (!empty($products)){
+            foreach ($products as $value){
+                $a[] =  $value  ;
+                $count++;
+            }
+        }
         return response()->json([
             'message' => 'index success',
             'status'=> 200,
-            'data' => $products
+            'data' => [$count,$products]
         ]);
     }
 
 
     //thêm mới một sản phẩm
-
     public function store(Request $request)
     {
+
         $product = $this->productRepository->create($request);
-        $category = $this->categoryRepository->getAll();
-        $store = $this->storeRepository->getAll();
+        $category = $this->categoryRepository->index();
+        $store = $this->storeRepository->index();
         return response()->json(['message' => 'create success', 'data' => $product, $category, $store], 200);
     }
 
@@ -72,8 +80,8 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $product = $this->productRepository->edit($request, $id);
-        $category = $this->categoryRepository->getAll();
-        $store = $this->storeRepository->getAll();
+        $category = $this->categoryRepository->index();
+        $store = $this->storeRepository->index();
         return response()->json(['message' => 'update success', 'data' => $product], 200);
 
     }
@@ -90,13 +98,12 @@ class ProductController extends Controller
 
     public function searchProduct($name)
     {
-
         $data = Product::query()->where('name','LIKE','%'.$name.'%')
             ->get();
         if (count($data)){
             return response()->json(['message' => 'search success','data'=>$data]);
         }else{
-            return response()->json(['message' => 'No Data not found'], 404);
+            return response()->json(['message' => 'No Data not found'], 400);
         }
     }
 
@@ -105,11 +112,34 @@ class ProductController extends Controller
 
     public function searchFilter(Request $request)
     {
-
         $data = $request->get('name');
-        $result = Category::query()->where('name','LIKE',"%{$data}")
+        $result = Category::query()->where('name', 'LIKE', "%{$data}")
             ->get();
-        return response()->json(['message'=>'filter success','data'=>$result],200);
+        if (count($result)) {
+            return response()->json(['message' => 'filter success', 'data' => $result], 200);
+        }else{
+            return response()->json(['message' => 'No Data not found','data'=>[]], 400);
+        }
+    }
+
+    //lấy ra 5 sản phẩm mới nhất
+
+    public function get_five_products_new()
+    {
+        $count = 0;
+        $a = [];
+        $result = $this->productRepository->five_products_new();
+        if (!empty($result)) {
+            foreach ($result as $value) {
+                $a[] = $value;
+                $count++;
+            }
+        }
+        if (!empty($result)) {
+            return response()->json(['count'=>$count,'message' => 'get success', 'data' => $result], 200);
+        } else {
+            return response()->json(['message' => 'No Data not found', 'data' => []], 400);
+        }
     }
 
 }
