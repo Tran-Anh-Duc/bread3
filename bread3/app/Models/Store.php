@@ -19,7 +19,14 @@ class Store extends Model
         'description',
         'address',
         'phone',
+        'status'
     ];
+
+    const STATUS = 'status';
+
+
+    const ACTIVE = 'active';
+    const BLOCK = 'block';
 
     public function product()
     {

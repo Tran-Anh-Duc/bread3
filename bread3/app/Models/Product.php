@@ -39,6 +39,8 @@ class Product extends Model
     const ACTIVE = 'active';
     const BLOCK = 'block';
 
+    const VIEW_NUMBER = '1';
+
     public function categories()
     {
         return $this->hasMany(Category::class);

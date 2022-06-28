@@ -6,17 +6,20 @@ namespace App\Repositories;
 
 use App\Models\Log_products;
 use App\Models\Product;
+use App\Models\Store;
 use Illuminate\Http\Request;
 
 class ProductRepository extends BaseRepository
 {
     private $productModel;
     private $log_productsModel;
+    private $storeModel;
 
-    public function __construct(Product $product,Log_products $log_products)
+    public function __construct(Product $product,Log_products $log_products,Store $store)
     {
         $this->productModel = $product;
         $this->log_productsModel = $log_products;
+        $this->storeModel = $store;
     }
 
     const ID = 'id';
@@ -28,6 +31,7 @@ class ProductRepository extends BaseRepository
 
     public function create(Request $request)
     {
+
         $data = [
             Product::NAME => $request->name,
             Product::DESCRIPTION => $request->description,
@@ -37,8 +41,9 @@ class ProductRepository extends BaseRepository
             Product::STORE_ID => $request->store_id,
             Product::STATUS => Product::ACTIVE,
             Product::PRODUCT_CODE => 'BM'.rand(10,100),
+            Product::VIEW => Product::VIEW_NUMBER,
         ];
-        $result = $this->productModel->create($data);
+        $result = $this->productModel->where($this->storeModel::STATUS, 'active' )->create($data);
         return $result;
     }
 
@@ -73,15 +78,15 @@ class ProductRepository extends BaseRepository
     {
         $count = 0;
         $result = $this->productModel->find($id);
-        if (!empty($result)){
-             $this->log_productsModel->create([
-                 'name' => $result['name'],
-                 'description' => $result['description'],
-                 'price' => $result['price'],
-                 'view' =>$result['view'],
-                 'product_code' =>$result['product_code']
-             ]);
-             $count++;
+        if (!empty($result)) {
+            $this->log_productsModel->create([
+                'name' => $result['name'],
+                'description' => $result['description'],
+                'price' => $result['price'],
+                'view' => $result['view'],
+                'product_code' => $result['product_code']
+            ]);
+            $count++;
         };
         return $result;
     }
@@ -92,6 +97,16 @@ class ProductRepository extends BaseRepository
         $result = $this->productModel->orderBy(Product::CREATED_AT,'DESC')->limit(5)->get();
         return $result;
     }
+
+    public function get_top_view()
+    {
+        $data = [];
+        $result = $this->log_productsModel->orderBy($this->log_productsModel::VIEW , 'DESC')->limit(3)->get();
+        return $result;
+    }
+
+
+
 
 
 

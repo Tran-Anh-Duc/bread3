@@ -1,29 +1,30 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\StoreController;
-use App\Http\Controllers\UserController;
+use Illuminate\Http\Response;
+
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use Modules\Bread\Http\Controllers\CategoryController;
+use Modules\Bread\Http\Controllers\ProductController;
+
 
 /*
 |--------------------------------------------------------------------------
-| API Routes
+| Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
+| Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
+| contains the "web" middleware group. Now create something great!
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::prefix('/bread')->group(function() {
+//
+//    Route::get('/', function () {
+//        echo("Wellcome to module bread");
+//    });
+
 
 Route::prefix('/bread')->group(function() {
     Route::prefix("users")->group(function (){
@@ -47,7 +48,7 @@ Route::prefix('roles')->group(function (){
 });
 
 Route::prefix('categories')->group(function (){
-    Route::post('/index',[CategoryController::class,'index']);
+    Route::post('/',[CategoryController::class,'index']);
     Route::post('update/{id}',[CategoryController::class,'update']);
     Route::post('/create',[CategoryController::class,'store']);
     Route::post('/delete/{id}',[CategoryController::class,'destroy']);
@@ -62,7 +63,7 @@ Route::prefix('stores')->group(function (){
 });
 
 Route::prefix('products')->group(function (){
-    Route::post('/index',[ProductController::class,'index']);
+    Route::post('/',[ProductController::class,'list']);
     Route::post('/create',[ProductController::class,'store']);
     Route::post('/show/{id}',[ProductController::class,'show']);
     Route::post('/update/{id}',[ProductController::class,'update']);
@@ -82,5 +83,8 @@ Route::get('/search/{name}',[ProductController::class,'searchProduct']);
 Route::post('/filter',[ProductController::class,'searchFilter']);
 
 });
+
+
+//});
 
 

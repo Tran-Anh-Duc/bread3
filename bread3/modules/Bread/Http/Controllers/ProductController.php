@@ -1,23 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+
+namespace Modules\Bread\Http\Controllers;
 
 
 use App\Models\Category;
 use App\Models\Product;
 use App\Repositories\CategoryRepository;
-use App\Repositories\StoreRepository;
 use App\Repositories\ProductRepository;
+use App\Repositories\StoreRepository;
 use Illuminate\Http\Request;
 
-
-class ProductController extends Controller
+class ProductController extends BaseController
 {
-
     protected $productRepository;
     protected $categoryRepository;
     protected $storeRepository;
-
 
     public function __construct(ProductRepository $productRepository,
                                 CategoryRepository $categoryRepository,
@@ -29,32 +27,19 @@ class ProductController extends Controller
         $this->productRepository = $productRepository;
     }
 
-
-    // hiện tất cả các sản phẩm
-
-    public function index()
+    public function list()
     {
-        $count = 0;
-        $a = [];
         $products = $this->productRepository->index();
-        if (!empty($products)){
-            foreach ($products as $value){
-                $a[] =  $value  ;
-                $count++;
-            }
-        }
         return response()->json([
-            'message' => 'index success',
-            'status'=> 200,
-            'data' => [$count,$products]
+           BaseController::STATUS => BaseController::HTTP_OK,
+           BaseController::MESSAGE => BaseController::SUCCESS,
+           BaseController::DATA => $products,
         ]);
     }
-
 
     //thêm mới một sản phẩm
     public function store(Request $request)
     {
-
         $product = $this->productRepository->create($request);
         $category = $this->categoryRepository->index();
         $store = $this->storeRepository->index();
@@ -147,7 +132,4 @@ class ProductController extends Controller
         $result =$this->productRepository->get_top_view();
         return response()->json(['message' => 'filter success', 'data' => $result], 200);
     }
-
-
-
 }

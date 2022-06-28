@@ -18,7 +18,7 @@ class StoreRepository extends BaseRepository
 
     public function create(Request $request)
     {
-        $data = $request->only("name","description","address","phone");
+        $data = $request->only("name","description","address","phone,status");
         $store = Store::query()->create($data);
         return $store;
     }
@@ -49,4 +49,6 @@ class StoreRepository extends BaseRepository
         $result =$this->storeModel->find($id);
         return $result;
     }
+
+
 }

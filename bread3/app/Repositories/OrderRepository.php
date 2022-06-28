@@ -11,7 +11,7 @@ class OrderRepository
 
 //    public function addOrder($id)
 //    {
-//        $product = Product::query()->select('name', 'price', 'category_id', 'id', 'image', 'quantity')->find($id);
+//        $product = ProductController::query()->select('name', 'price', 'category_id', 'id', 'image', 'quantity')->find($id);
 //        return Cart::add(['id' => $id, 'name' => $product->name, 'quantity' => 1, 'price' => $product->price,
 //            'weight'=> 200,
 //            'options' => ['image' => $product->image]])->back();
@@ -67,7 +67,7 @@ class OrderRepository
                 unset($cart[$request->id]);
                 session()->put('cart',$cart);
             }
-            session()->flash('success', 'Product removed successfully');
+            session()->flash('success', 'ProductController removed successfully');
         }
     }
 
