@@ -1,0 +1,49 @@
+.container {
+    width: 90%;
+    margin: 0 auto;
+    background-color: #F4F4F4;
+    padding: 20px 10px;
+}
+.boder-radius {
+    border-radius: 10px;
+}
+.background-white {
+    background-color: white;
+}
+.content-left {
+    padding: 10px 30px;
+    margin: 10px 20px;
+}
+.width50 {
+    width: 50%;
+}
+.title {
+    font-weight: bold;
+}
+.margin-top50 {
+    margin-top: 50px;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.margin-left-50 {
+    margin-left: 50px;
+}
+.bill_total {
+    border-top: 1px solid rgba(89, 89, 89, 0.07); 
+    margin-top: 15px;
+    padding-top: 15px;
+    min-width: 400px;
+}
+.padding-bottom-150 {
+    padding-bottom: 150px;
+}
+.padding-bottom-50 {
+    padding-bottom: 50px;
+}
+td {
+    padding: 5px 0;
+}

@@ -1,0 +1,184 @@
+body {
+    font-size: 14px
+}
+
+.main-content .container {
+    padding-top: 20px
+}
+
+.theloading {
+    position: fixed;
+    z-index: 999;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .7);
+    top: 0;
+    right: 0;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.dropdown-customer li a {
+    cursor: pointer;
+    display: block;
+    padding: 10px;
+    color: #000;
+    font-size: 12px
+}
+
+.dropdown-item-detail {
+    position: absolute;
+    background: #fff;
+    margin-top: 0;
+    border: 1px solid #d9dee4;
+    -webkit-box-shadow: none;
+    right: 10px;
+    width: 100px;
+    padding: 0
+}
+
+.table-responsive {
+    padding: 10px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 0 7px 1px #ddd;
+    overflow-x: unset
+}
+
+.table-responsive table th {
+    color: #047734;
+    border-color: #ccc !important
+}
+
+.table-responsive tr td {
+    text-align: center
+}
+
+.btn_bar {
+    border-style: none;
+    background: unset;
+    margin-bottom: 0
+}
+
+.btn_bar:hover .not_hover, .hover {
+    display: none
+}
+
+.btn_bar:hover .hover {
+    display: block;
+    margin-bottom: -4px
+}
+
+#fillter-button, #select-time, .btn-func {
+    font-size: 14px !important
+}
+
+#fillter-content {
+    width: 300px;
+    right: 175px !important
+}
+
+#fillter-content * {
+    font-size: 12px !important
+}
+
+.datepicker {
+    max-width: 200px
+}
+
+.total-info {
+    width: 100%;
+    padding-left: 0;
+}
+
+.top {
+    margin-top: 30px;
+    margin-bottom: 50px
+}
+
+.total-info h6 {
+    padding: 0 10px;
+    margin-right: 20px;
+    display: inline-block;
+    min-width: 50px;
+    height: 50px;
+    border: 1px solid #047734;
+    border-radius: 10px;
+    background-color: #047734;
+    color: #fff
+}
+
+.tilte_top_tabs {
+    color: #047734;
+    font-weight: 600;
+    text-shadow: 3px 3px hsla(0, 0%, 80%, .4)
+}
+
+.total-info h6 span {
+    vertical-align: -15px;
+    font-size: 14px
+}
+
+.btn_list_filter {
+    text-align: right;
+    padding: 10px 0
+}
+
+.btn_list_filter .btn-fitler {
+    display: inline-block
+}
+
+.btn-fitler input {
+    padding-top: 3.5px;
+    padding-bottom: 8.5px
+}
+
+.pagination {
+    float: left
+}
+
+.pagination li.page-number a {
+    width: 45px;
+    text-align: center
+}
+
+.pagination .active a {
+    border: 1px solid #047734 !important;
+    background-color: #047734 !important;
+    color: #fff !important
+}
+
+.pagination li.hide-item {
+    display: none !important
+}
+.box
+{
+    box-shadow: 0px 0px 2px 2px #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    width: 65%;
+}
+.box_content
+{
+    display: flex;
+    position: relative;
+    margin-bottom: 10px;
+}
+.box_left
+{
+    margin-right: 20px;
+    width: 112px;
+}
+.box_right
+{
+
+}
+.box_right .btn
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+}

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "471177224fc783c1d3c97fd6358bcf2e",
+    "content-hash": "f3888f8943ff85d304ad18f83be04edb",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5187,6 +5187,38 @@
             }
         },
         {
+            "name": "bread/view-cpanel",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./modules/ViewCpanel",
+                "reference": "7f3efe13ad2063928930b5ce711145ba14f75364"
+            },
+            "require": {
+                "maatwebsite/excel": "^3.1",
+                "phpoffice/phpspreadsheet": "^1.2",
+                "rap2hpoutre/laravel-log-viewer": "^1.7",
+                "zircote/swagger-php": "^3.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\ViewCpanel\\Providers\\ViewCpanelServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "modules\\ViewCpanel\\": ""
+                }
+            },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "doctrine/annotations",
             "version": "1.13.2",
             "source": {
@@ -8498,7 +8530,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "3ae/bread": 20
+        "3ae/bread": 20,
+        "bread/view-cpanel": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

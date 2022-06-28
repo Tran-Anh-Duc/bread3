@@ -5,7 +5,11 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Modules\Bread\Http\Controllers\CategoryController;
+use Modules\Bread\Http\Controllers\OrderController;
 use Modules\Bread\Http\Controllers\ProductController;
+use Modules\Bread\Http\Controllers\RoleController;
+use Modules\Bread\Http\Controllers\StoreController;
+use Modules\Bread\Http\Controllers\UserController;
 
 
 /*
@@ -19,11 +23,7 @@ use Modules\Bread\Http\Controllers\ProductController;
 |
 */
 
-//Route::prefix('/bread')->group(function() {
-//
-//    Route::get('/', function () {
-//        echo("Wellcome to module bread");
-//    });
+
 
 
 Route::prefix('/bread')->group(function() {
@@ -85,6 +85,6 @@ Route::post('/filter',[ProductController::class,'searchFilter']);
 });
 
 
-//});
+
 
 
