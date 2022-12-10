@@ -106,6 +106,7 @@
             </a>
         </div>
     </div>
+    <div class="card">
     <div class="flex-container row">
         @if(count($products) > 0)
             @foreach($products as $key=>$value)
@@ -124,7 +125,7 @@
             @endforeach
         @endif
     </div>
-
+ </div>
 
 
 
